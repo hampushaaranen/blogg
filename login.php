@@ -1,41 +1,42 @@
 <?php
+session_start();
 /* 
 Created By Adam Khoury @ www.flashbuilding.com 
 -----------------------June 20, 2008----------------------- 
 */
-if ($_POST['name']) {
+if (isset($_POST['name'])) {
 //Connect to the database through our include 
-include_once "resources/init.php";
+include_once "simple2/resources/init.php";
 $name = stripslashes($_POST['name']);
 $name = strip_tags($name);
 $name = mysql_real_escape_string($name);
-$password = ereg_replace("[^A-Za-z0-9]", "", $_POST['password']); // filter everything but numbers and letters
-$password = md5($password);
+$password = preg_replace("[^A-Za-z0-9]", "", $_POST['password']); // filter everything but numbers and letters
+//$password = md5($password);
 // Make query and then register all database data that -
 // cannot be changed by member into SESSION variables.
 // Data that you want member to be able to change -
 // should never be set into a SESSION variable.
-$sql = mysql_query("SELECT * FROM members WHERE name='$name' AND password='$password'"); 
+$sql = mysql_query("SELECT * FROM login WHERE name='$name' AND password='$password'"); 
 $login_check = mysql_num_rows($sql);
 if($login_check > 0){ 
     while($row = mysql_fetch_array($sql)){ 
         // Get member ID into a session variable
         $id = $row["id"];   
-        session_register('id'); 
+        //session_register('id'); 
         $_SESSION['id'] = $id;
         // Get member username into a session variable
-	    $username = $row["username"];   
-        session_register('username'); 
+	      $username = $row["username"];   
+        //session_register('username'); 
         $_SESSION['username'] = $username;
         // Update last_log_date field for this member now
-        mysql_query("UPDATE members SET lastlogin=now() WHERE id='$id'"); 
+         
         // Print success message here if all went well then exit the script
-		header("location: member_profile.php?id=$id"); 
+		header("location: simple2/index.php?id=$id"); 
 		exit();
     } // close while
 } else {
 // Print login failure message to the user and link them back to your login page
-  print '<br /><br /><font color="#FF0000">No match in our records, try again </font><br />
+  print '<br /><br /><font color="#FF0000">Enter a valid username/password, please try again. </font><br />
 <br /><a href="login.php">Click here</a> to go back to the login page.';
   exit();
 }

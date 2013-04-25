@@ -35,7 +35,7 @@ function delete($table, $id) {
 	mysql_query("DELETE FROM `{$table}` WHERE `id` =  {$id}");
 
 }
-function get_posts($id = null, $cat_id = null) {
+function get_posts($id = null, $cat_id = null, $login_id = null) {
 	$posts = array();
 
 	$query = "SELECT  `posts` . `id` AS `post_id`, `categories` . `id` AS `category_id`,
@@ -51,6 +51,33 @@ function get_posts($id = null, $cat_id = null) {
 			  if ( isset($cat_id) )  {
 			  	$cat_id = (int) $cat_id;
 			  	$query .= " WHERE `cat_id` = {$cat_id}";
+			  }
+
+			   if ( isset($login_id) )  {
+			  	$login_id = (int) $login_id;
+			  	$query .= " WHERE `login_id` = {$login_id}";
+			  } 
+
+			  $query .= " ORDER BY `posts` . `id` DESC";
+
+	$query = mysql_query($query);
+	
+	while ($row = mysql_fetch_assoc($query) ) {
+		$posts [] = $row;
+	} 		  
+	return $posts;
+}
+function get_posts_member($login_id = null) {
+	$posts = array();
+
+	$query = "SELECT  `posts` . `id` AS `post_id`, `categories` . `id` AS `category_id`,
+					  `title`, `contents`, `date_posted`, `categories` . `name`
+			  FROM `posts`
+			  INNER JOIN `categories` ON `categories` . `id` = `posts` . `cat_id`";
+
+			  if( isset($login_id) ) {
+			  	$login_id = (int) $login_id;
+			  	$query .= "WHERE `posts` . `login_id` = {$login_id}";
 			  }
 
 			  $query .= " ORDER BY `posts` . `id` DESC";
