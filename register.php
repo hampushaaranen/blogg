@@ -58,10 +58,10 @@ if (isset($_POST['name'])){
 		// Start assembly of Email Member the activation link
 		$to = "$email";
 		// Change this to your site admin email
-		$from = "admin@somewebsite.com";
+		// $from = "admin@somewebsite.com";
 		$subject = "Complete your registration";
 		//Begin HTML Email Message where you need to change the activation URL inside
-		$message = '<html>
+		/* $message = '<html>
 		<body bgcolor="#FFFFFF">
 		Hi ' . $name . ',
 		<br /><br />
@@ -77,7 +77,7 @@ if (isset($_POST['name'])){
 		<br /><br /> 
 		Thanks! 
 		</body>
-		</html>';
+		</html>'; 
 		// end of message
 		$headers = "From: $from\r\n";
 		$headers .= "Content-type: text/html\r\n";
@@ -89,7 +89,7 @@ if (isset($_POST['name'])){
 		We just sent an Activation link to: $email<br /><br />
 		<strong><font color=\"#990000\">Please check your email inbox in a moment</font></strong> to click on the Activation <br />
 		Link inside the message. After email activation you can log in.";
-		exit(); // Exit so the form and page does not display, just this success message
+		exit(); // Exit so the form and page does not display, just this success message */
 	} // Close else after database duplicate field value checks
   } // Close else after missing vars check
 } //Close if $_POST

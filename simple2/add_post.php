@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once('resources/init.php');
 
 if ( isset($_POST['title'], $_POST['contents'], $_POST['category']) ) {
@@ -26,7 +27,7 @@ if ( isset($_POST['title'], $_POST['contents'], $_POST['category']) ) {
 
         $id = mysql_insert_id();
 
-        header("Location: index.php?id={$id}");
+        header("Location: index.php?id={$_SESSION['id']}");
         die();
     }
     

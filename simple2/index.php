@@ -6,10 +6,10 @@ if ( isset($_SESSION['id'])) {
     //$posts = ( isset($_GET['id']) ) ? get_posts($_GET['id']) : get_posts();
     $posts = get_posts_member($_SESSION['id']);
     $userid = $_SESSION['id'];
-    $name = $_SESSION['name'];
-    print_r($name);
-    print_r($userid);
-    $toplinks = '<a href="index.php?id=' . $userid . '">' . $name . '</a> &bull; 
+   // $name = $_SESSION['name'];
+  //  print_r($name);
+    
+    $toplinks = '<a href="index.php?id=' . $userid . '"></a> &bull; 
     <a href="../logout.php">Log Out</a>';
    
 } else {

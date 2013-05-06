@@ -1,11 +1,12 @@
 <?php
 
-function add_post($title, $contents, $category) {
+function add_post($title, $contents, $category, $login_id) {
 	$title       = mysql_real_escape_string($title);
 	$contents    = mysql_real_escape_string($contents);
 	$category    = (int) $category;
+	$login_id    = mysql_real_escape_string($login_id);
 
-	mysql_query("INSERT INTO `posts` SET `cat_id` = {$category}, `title` = '{$title}', `contents` = '{$contents}', `date_posted` = NOW()");
+	mysql_query("INSERT INTO `posts` SET `cat_id` = {$category}, `login_id` = {$login_id}, `title` = '{$title}', `contents` = '{$contents}', `date_posted` = NOW()");
 }
 
 function edit_post($id, $title, $contents, $category){
