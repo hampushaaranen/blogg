@@ -23,7 +23,8 @@ if ( isset($_POST['title'], $_POST['contents'], $_POST['category']) ) {
     }
 
     if ( empty($errors) ) {
-        add_post($title, $contents, $_POST['category']);
+
+        add_post($title, $contents, $_POST['category'], $_SESSION['id']);
 
         $id = mysql_insert_id();
 

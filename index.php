@@ -4,12 +4,9 @@ session_start(); // Must start session first thing
 $toplinks = "";
 if (isset($_SESSION['id'])) {
 	// Put stored session variables into local php variable
-  print_r($_SESSION['id']);
-  print_r($_SESSION['name']);
     $userid = $_SESSION['id'];
-    $name = $_SESSION['name'];
 
-	$toplinks = '<a href="simple2/index.php?id=' . $userid . '">' . $name . '</a> &bull; 
+	$toplinks = '<a href="simple2/index.php?id=' . $userid . '"></a> &bull; 
 	<a href="simple2/index.php">Account</a>';
 } else {
 	$toplinks = '<a href="register.php">Registrera</a> &bull; <a href="login.php">Logga in</a>';
@@ -24,7 +21,9 @@ if (isset($_SESSION['id'])) {
 <!--
 body {margin: 0px}
 -->
-</style></head>
+</style>
+
+</head>
 
 <body>
 <table style="background-color: #CCC" width="100%" border="0" cellpadding="12">
